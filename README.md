@@ -223,14 +223,45 @@ If you see "Expected IDs to be unique" errors:
 
 On first run, ChromaDB downloads the embedding model (~79MB). This takes 1-2 minutes. Let it complete.
 
+## Automatic Updates
+
+### Setup Scheduled Indexing
+
+The RAG system includes an automatic update script that runs daily:
+
+```bash
+# Manual test
+bash /home/william/.openclaw/workspace/scripts/rag-auto-update.sh
+```
+
+**What it does:**
+- Detects new/updated chat sessions and re-indexes them
+- Re-indexes workspace files (captures code changes)
+- Updates skill documentation
+- Maintains state to avoid re-processing unchanged files
+- Runs via cron at 4:00 AM UTC daily
+
+**Configuration:**
+```bash
+# View cron job
+openclaw cron list
+
+# Edit schedule (if needed)
+openclaw cron update <job-id> --schedule "{\"expr\":\"0 4 * * *\"}"
+```
+
+**State tracking:** `~/.openclaw/workspace/memory/rag-auto-state.json`
+**Log file:** `~/.openclaw/workspace/memory/rag-auto-update.log`
+
 ## Best Practices
 
-### Re-index Regularly
+### Automatic Update Enabled
 
-After significant work, re-ingest to keep knowledge current:
+The RAG system now automatically updates daily - no manual re-indexing needed.
+
+After significant work, you can still manually update:
 ```bash
-python3 ingest_sessions.py
-python3 ingest_docs.py workspace
+bash /home/william/.openclaw/workspace/scripts/rag-auto-update.sh
 ```
 
 ### Use Specific Queries
