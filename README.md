@@ -16,10 +16,17 @@ Full-featured Retrieval-Augmented Generation (RAG) system for OpenClaw - search 
 ### Installation
 
 ```bash
-# No external dependencies - just Python 3
+# Install Python dependency
 cd ~/.openclaw/workspace/rag
 python3 -m pip install --user chromadb
 ```
+
+**No API keys required** - This system is fully local:
+- Embeddings: all-MiniLM-L6-v2 (downloaded once, 79MB)
+- Vector store: ChromaDB (persistent disk storage)
+- Data location: `~/.openclaw/data/rag/` (auto-created)
+
+All operations run offline with no external dependencies besides the initial ChromaDB download.
 
 ### Index Your Data
 
@@ -311,9 +318,16 @@ MIT License - Free to use and modify
 
 Contributions welcome! Areas for improvement:
 - API documentation indexing from external URLs
-- Automated re-indexing cron job
+- File system watch for automatic re-indexing
 - Better chunking strategies for long documents
 - Integration with external vector stores (Pinecone, Weaviate)
+
+## Documentation Files
+
+- **CHANGELOG.md** - Version history and changes
+- **SKILL.md** - OpenClaw skill integration guide
+- **package.json** - Skill metadata (no credentials required)
+- **LICENSE** - MIT License
 
 ## Author
 
