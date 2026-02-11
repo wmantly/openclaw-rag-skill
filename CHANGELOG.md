@@ -48,14 +48,23 @@ All notable changes to the OpenClaw RAG Knowledge System will be documented in t
 
 ---
 
-## [1.0.0] - 2026-02-11 (Enhancements)
+## [1.0.1] - 2026-02-11
 
-### Security & Metadata
-- Added package.json with OpenClaw skill metadata
-- Declared data storage path: ~/.openclaw/data/rag/
-- Explicitly stated: NO required environment variables
-- Added MIT License
-- Added CHANGELOG.md
+### Added
+- `package.json` with complete OpenClaw skill metadata
+- `CHANGELOG.md` for version tracking
+- `LICENSE` (MIT) for proper licensing
+
+### Changed
+- `package.json` explicitly declares NO required environment variables (fully local system)
+- Documented data storage path: `~/.openclaw/data/rag/`
+- Enhanced `README.md` with clearer installation instructions
+- Added references to CHANGELOG, LICENSE, and package.json in README
+- Clarified that no API keys or credentials are required
+
+### Documentation
+- Improved documentation transparency to meet security scanner best practices
+- Clearly documented the fully-local nature of the system (no external dependencies)
 
 ---
 
