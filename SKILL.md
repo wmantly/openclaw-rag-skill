@@ -1,3 +1,8 @@
+---
+name: rag
+description: Complete RAG (Retrieval-Augmented Generation) system for OpenClaw. Indexes chat sessions, workspace code, documentation, and skills into local ChromaDB for semantic search. Enables finding past solutions, code patterns, and decisions instantly. Uses local embeddings (all-MiniLM-L6-v2) with no API keys required. Automatically ingests and updates knowledge base from ~/.openclaw/agents/main/sessions and workspace files.
+---
+
 # OpenClaw RAG Knowledge System
 
 **Retrieval-Augmented Generation for OpenClaw – Search chat history, code, docs, and skills with semantic understanding**
@@ -333,6 +338,21 @@ This skill integrates seamlessly with OpenClaw:
 2. **Session history**: All conversations indexed and searchable
 3. **Workspace awareness**: Code and docs indexed for reference
 4. **Skill accessible**: Use from any OpenClaw session or script
+
+## Security Considerations
+
+**⚠️ Important Privacy Note:** This RAG system indexes local data, which may contain:
+- API keys, tokens, or credentials in session transcripts
+- Private messages or personal information
+- Tool results with sensitive data
+- Workspace configuration files
+
+**Recommended:**
+- Review session files before ingestion if concerned about privacy
+- Consider redacting sensitive data from session files
+- Use `rag_manage.py reset` to delete the entire index when needed
+- The ChromaDB persistence at `~/.openclaw/data/rag/` can be deleted to remove all indexed data
+- The auto-update script only runs local ingestion - no remote code fetching
 
 ## Example Workflow
 
