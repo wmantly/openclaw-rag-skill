@@ -82,6 +82,35 @@ All notable changes to the OpenClaw RAG Knowledge System will be documented in t
 
 ---
 
+## [1.0.2] - 2026-02-12
+
+### Added
+- YAML front matter to SKILL.md with `name: rag` and `description` for ClawHub compatibility
+- `Security Considerations` section documenting privacy implications and sensitive data risks
+- `scripts/rag-auto-update.sh` included in skill package (previously in separate location)
+- `.skill` package for ClawHub distribution (28KB, 14 files)
+
+### Changed
+- Updated package.json description to match SKILL.md front matter
+- Documented auto-update script behavior for security review (local-only ingestion)
+- Clarified ChromaDB storage location and data deletion procedures
+
+### Fixed
+- **Cron job HTTP 500 errors**: Changed from `sessionTarget: "main"` to `isolated` to avoid flooding chat with thousands of lines of output
+- **Cron schedule**: Fixed from `0 4 * * *` to `0 0 * * *` to match actual midnight UTC execution time
+
+### Security
+- Documented that RAG indexes all session transcripts and workspace files (may contain API keys, credentials, private messages)
+- Added recommendations for privacy-conscious use: review sessions before ingestion, use `rag_manage.py reset` to delete all indexed data
+- Confirmed auto-update script only runs local ingestion scripts - no remote code fetching
+
+### Documentation
+- Added detailed security warnings in SKILL.md
+- Explained how to delete ChromaDB persistence directory (`~/.openclaw/data/rag/`)
+- Provided guidance on redacting sensitive data before ingestion
+
+---
+
 ## Version Guidelines
 
 This project follows [Semantic Versioning](https://semver.org/):
