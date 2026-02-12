@@ -10,7 +10,9 @@ This prints relevant context if found, otherwise silent.
 """
 
 import sys
-sys.path.insert(0, '/home/william/.openclaw/workspace/rag')
+import os
+# Use current directory for imports (skill directory)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from rag_query_wrapper import search_knowledge, format_for_ai
 

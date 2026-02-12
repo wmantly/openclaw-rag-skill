@@ -354,6 +354,15 @@ This skill integrates seamlessly with OpenClaw:
 - The ChromaDB persistence at `~/.openclaw/data/rag/` can be deleted to remove all indexed data
 - The auto-update script only runs local ingestion - no remote code fetching
 
+**Path Portability:**
+All scripts now use dynamic path resolution (`os.path.expanduser()`, `Path(__file__).parent`) for portability across different user environments. No hard-coded absolute paths remain in the codebase.
+
+**Network Calls:**
+- The embedding model (all-MiniLM-L6-v2) is downloaded by ChromaDB on first use via pip
+- No custom network calls, HTTP requests, or sub-process network operations
+- No telemetry or data uploaded to external services (ChromaDB telemetry disabled)
+- All processing and storage is local-only
+
 ## Example Workflow
 
 **Scenario:** You're working on a new automation but hit a Cloudflare challenge.

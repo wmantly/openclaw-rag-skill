@@ -4,10 +4,16 @@
 
 set -e
 
+# Use dynamic paths for portability
+HOME="${HOME:-$(cd ~ && pwd)}"
+OPENCLAW_DIR="${OPENCLAW_DIR:-$HOME/.openclaw}"
+WORKSPACE_DIR="${OPENCLAW_DIR}/workspace"
+
 # Paths
-RAG_DIR="/home/william/.openclaw/workspace/rag"
-STATE_FILE="/home/william/.openclaw/workspace/memory/rag-auto-state.json"
-LOG_FILE="/home/william/.openclaw/workspace/memory/rag-auto-update.log"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RAG_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+STATE_FILE="$WORKSPACE_DIR/memory/rag-auto-state.json"
+LOG_FILE="$WORKSPACE_DIR/memory/rag-auto-update.log"
 
 # Timestamp
 TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -35,14 +41,14 @@ log() {
 
 # Get latest session file modification time
 latest_session_time() {
-    find ~/.openclaw/agents/main/sessions -name "*.jsonl" -type f -printf '%T@\n' 2>/dev/null | sort -rn | head -1 | cut -d. -f1 || echo "0"
+    find "$OPENCLAW_DIR/agents/main/sessions" -name "*.jsonl" -type f -printf '%T@\n' 2>/dev/null | sort -rn | head -1 | cut -d. -f1 || echo "0"
 }
 
 log "=== RAG Auto-Update Started ==="
 
 # Get current stats
-SESSION_COUNT=$(find ~/.openclaw/agents/main/sessions -name "*.jsonl" | wc -l)
-WORKSPACE_COUNT=$(find ~/.openclaw/workspace -type f \( -name "*.py" -o -name "*.js" -o -name "*.md" -o -name "*.json" \) | wc -l)
+SESSION_COUNT=$(find "$OPENCLAW_DIR/agents/main/sessions" -name "*.jsonl" 2>/dev/null | wc -l)
+WORKSPACE_COUNT=$(find "$WORKSPACE_DIR" -type f \( -name "*.py" -o -name "*.js" -o -name "*.md" -o -name "*.json" \) 2>/dev/null | wc -l)
 LATEST_SESSION=$(latest_session_time)
 
 # Read last indexed timestamp
@@ -59,7 +65,7 @@ if [ "$LATEST_SESSION" -gt "$LAST_SESSION_INDEX" ]; then
     log "✓ New/updated sessions detected, re-indexing..."
 
     cd "$RAG_DIR"
-    python3 ingest_sessions.py --sessions-dir ~/.openclaw/agents/main/sessions >> "$LOG_FILE" 2>&1
+    python3 ingest_sessions.py --sessions-dir "$OPENCLAW_DIR/agents/main/sessions" >> "$LOG_FILE" 2>&1
 
     if [ $? -eq 0 ]; then
         log "✅ Sessions re-indexed successfully"
@@ -99,9 +105,9 @@ fi
 DOC_COUNT=$(cd "$RAG_DIR" && python3 -c "
 import sys
 sys.path.insert(0, '.')
-from rag_system import get_collection
-collection = get_collection()
-print(collection.count())
+from rag_system import RAGSystem
+rag = RAGSystem()
+print(rag.collection.count())
 " 2>/dev/null || echo "unknown")
 
 # Update state

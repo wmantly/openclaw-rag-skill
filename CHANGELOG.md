@@ -68,6 +68,35 @@ All notable changes to the OpenClaw RAG Knowledge System will be documented in t
 
 ---
 
+## [1.0.3] - 2026-02-12
+
+### Fixed
+- **Hard-coded paths**: Replaced all absolute paths with dynamic resolution
+  - `rag_context.py`: Now uses `os.path.dirname(os.path.abspath(__file__))`
+  - `scripts/rag-auto-update.sh`: Uses `$HOME`, `OPENCLAW_DIR`, and relative paths
+  - Removed hard-coded `/home/william/.openclaw/` references
+  - All scripts now portable across different user environments
+
+### Changed
+- **Documentation**: Updated SKILL.md with path portability notes
+  - Documented that all paths use dynamic resolution
+  - Confirmed no custom network calls or external telemetry
+  - Added "Network Calls" section addressing security scan concerns
+- **rag_query_wrapper.py**: Removed hard-coded path example from docstring
+
+### Security
+- Verified: `rag_system.py` has no network calls (only imports chromadb)
+- Verified: `scripts/rag-auto-update.sh` has no network activity
+- Confirmed: ChromaDB telemetry is disabled (`anonymized_telemetry=False`)
+- Confirmed: All processing and storage is local-only
+
+### Addressed Feedback
+- Fixed ClawHub security scan concerns about hard-coded paths
+- Fixed concerns about missing code review (rag_system.py is fully auditable)
+- Documented network behavior (only model download by ChromaDB on first run)
+
+---
+
 ## [Unreleased]
 
 ### Planned

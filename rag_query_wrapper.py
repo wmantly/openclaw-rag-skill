@@ -6,8 +6,6 @@ This is designed for automatic RAG integration. The AI can call this function
 to retrieve relevant context from past conversations, code, and documentation.
 
 Usage (from within Python script or session):
-    import sys
-    sys.path.insert(0, '/home/william/.openclaw/workspace/rag')
     from rag_query_wrapper import search_knowledge
     results = search_knowledge("your question")
     print(results)
