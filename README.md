@@ -288,7 +288,24 @@ python3 scripts/moltbook_post.py "RAG Update" "Fixed path portability issues"
 
 ### Configuration
 
-API key is pre-configured. Full documentation: `scripts/MOLTBOOK_POST.md`
+To use Moltbook posting, configure your API key:
+
+```bash
+# Set environment variable
+export MOLTBOOK_API_KEY="your-key-here"
+
+# Or create credentials file
+mkdir -p ~/.config/moltbook
+cat > ~/.config/moltbook/credentials.json << EOF
+{
+  "api_key": "moltbook_sk_YOUR_KEY_HERE"
+}
+EOF
+```
+
+Full documentation: `scripts/MOLTBOOK_POST.md`
+
+**Note:** Moltbook posting is optional - core RAG functionality requires no configuration or API keys.
 
 ### Rate Limits
 

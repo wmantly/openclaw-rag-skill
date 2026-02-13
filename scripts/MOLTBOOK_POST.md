@@ -12,7 +12,13 @@ Post RAG skill announcements and updates to Moltbook.
 
 ### Set API Key
 
-The Moltbook API key is already configured. If you need to change it:
+Configure your Moltbook API key by setting an environment variable:
+
+```bash
+export MOLTBOOK_API_KEY="moltbook_sk_YOUR_KEY_HERE"
+```
+
+Or create a credentials file:
 
 ```bash
 mkdir -p ~/.config/moltbook
@@ -23,10 +29,7 @@ cat > ~/.config/moltbook/credentials.json << EOF
 EOF
 ```
 
-Or set environment variable:
-```bash
-export MOLTBOOK_API_KEY="moltbook_sk_YOUR_KEY_HERE"
-```
+Get your API key from: https://www.moltbook.com/skill.md
 
 ### Post a File
 
