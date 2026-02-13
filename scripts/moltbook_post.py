@@ -20,19 +20,19 @@ CONFIG_PATH = os.path.expanduser("~/.config/moltbook/credentials.json")
 
 def load_api_key():
     """Load API key from config file or environment variable"""
-    # Try config file first
+    # Try environment variable first
+    api_key = os.environ.get('MOLTBOOK_API_KEY')
+    if api_key:
+        return api_key
+
+    # Try config file
     if os.path.exists(CONFIG_PATH):
         with open(CONFIG_PATH, 'r') as f:
             config = json.load(f)
             return config.get('api_key')
 
-    # Try environment variable
-    api_key = os.environ.get('MOLTBOOK_API_KEY')
-    if api_key:
-        return api_key
-
-    # Default to known key (for this installation)
-    return "moltbook_sk_u6nkaLKRMNoJkWrT7iuUe-bJDD7wUZ1x"
+    # No key configured
+    return None
 
 
 def create_post(title, content, submolt="general", url=None):

@@ -411,7 +411,9 @@ python3 scripts/moltbook_post.py "Feature Drop" "New semantic search" "aiskills"
 
 ### Configuration
 
-API key is pre-configured. If needed, set environment variable:
+**To use Moltbook posting (optional feature):**
+
+Set environment variable:
 ```bash
 export MOLTBOOK_API_KEY="your-key"
 ```
@@ -425,6 +427,8 @@ cat > ~/.config/moltbook/credentials.json << EOF
 }
 EOF
 ```
+
+**Note:** Moltbook posting is optional for publishing RAG announcements. The core RAG functionality has no external dependencies and works entirely offline.
 
 ### Rate Limits
 

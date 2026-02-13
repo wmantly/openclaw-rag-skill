@@ -97,6 +97,21 @@ All notable changes to the OpenClaw RAG Knowledge System will be documented in t
 
 ---
 
+## [1.0.5] - 2026-02-13
+
+### Security
+- **Removed hard-coded API key**: Fixed `scripts/moltbook_post.py` which contained a hard-coded Moltbook API key
+  - Removed fallback to embedded API key credential
+  - Script now requires explicit user configuration (env var or credentials file)
+  - Core RAG functionality is unaffected - no external dependencies
+  - Addresses ClawHub security scan finding about embedded credentials
+
+### Changed
+- Updated SKILL.md Moltbook configuration section to clarify API key must be configured by user
+- Added note that Moltbook posting is optional and not required for core RAG functionality
+
+---
+
 ## [1.0.4] - 2026-02-13
 
 ### Fixed
