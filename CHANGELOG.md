@@ -97,6 +97,22 @@ All notable changes to the OpenClaw RAG Knowledge System will be documented in t
 
 ---
 
+## [1.0.4] - 2026-02-13
+
+### Fixed
+- **Hard-coded paths in launch_rag_agent.sh**: Fixed missing portability update from v1.0.3
+  - Replaced `/home/william/.openclaw/workspace/rag` with `os.path.expanduser("~/.openclaw/workspace/rag")`
+  - Replaced `/home/william/.local/bin/openclaw` with dynamic PATH resolution
+  - Now checks for `openclaw` in PATH first, then falls back to `~/.local/bin/openclaw`
+  - Proper error message if openclaw not found
+
+### Security
+- Removed all user-specific hard-coded paths from launch_rag_agent.sh
+- Verified portability across different user environments
+- Script now installs correctly in OpenClaw skill packages for any user
+
+---
+
 ## [Unreleased]
 
 ### Planned
