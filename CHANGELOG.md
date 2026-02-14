@@ -2,6 +2,20 @@
 
 All notable changes to the OpenClaw RAG Knowledge System will be documented in this file.
 
+## [1.0.6] - 2026-02-14
+
+### Changed
+- **Repository URL**: Updated git repository URL to https://openclaw-rag-skill.projects.theta42.com
+  - Updated in package.json, README.md, SKILL.md, and index.html
+- **Website tracking**: Added analytics tracking script to index.html for usage statistics
+- **Version bump**: Updated version to 1.0.6 in package.json and index.html footer
+
+### Documentation
+- Updated all repository references from git.theta42 to projects.theta42
+- Updated footer version display on website
+
+---
+
 ## [1.0.0] - 2026-02-11
 
 ### Added
